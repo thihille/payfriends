@@ -1,0 +1,34 @@
+<div id="pay-login">
+  <div class="credentials">
+    <form [formGroup]="credentials" (submit)="handleLogin()">
+      <div class="logo">
+        <img src="../../../../assets/img/logo.svg" alt="PayFriends">
+      </div>
+      <div>
+        <h2>Bem vindo de volta</h2>
+      </div>
+      <div class="message-error" *ngIf="messageError">
+        <p>{{ messageError }}</p>
+      </div>
+      <div>
+        <div class="input-theme" name-label="Email" [class.valid-value]="credentials.controls.login.valid">
+          <input type="email" formControlName="login" name="login" id="login" class="invisible-form" autocomplete="off">
+        </div>
+      </div>
+      <div>
+        <div class="input-theme" name-label="Senha" [class.valid-value]="credentials.controls.pass.valid">
+          <div class="show-password" (click)="viewPassword = !viewPassword">
+            <i-feather [name]="viewPassword ? 'eye' : 'eye-off'" class="icon-show-password"></i-feather>
+          </div>
+          <input [type]="viewPassword ? 'text' : 'password'" formControlName="pass" name="password" id="password" class="invisible-form" autocomplete="off">
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn-enter" [class.disabled]="loading">{{ loading ? 'Entrando...' : 'Entrar'}}</button>
+      </div>
+    </form>
+  </div>
+  <div class="image">
+    <pay-illustrator-friend></pay-illustrator-friend>
+  </div>
+</div>

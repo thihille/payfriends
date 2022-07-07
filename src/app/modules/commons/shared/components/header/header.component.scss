@@ -1,0 +1,67 @@
+:host {
+
+  section {
+    background-color: #002D69;
+    display: flex;
+    height: 90px;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo {
+      margin-left: 20px;
+    }
+
+    .profile {
+      margin-right: 20px;
+
+      img {
+        width: 60px;
+      }
+    }
+
+    .profile:hover + .menu {
+      pointer-events: all;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .menu {
+      position: absolute;
+      right: 35px;
+      top: 80px;
+      transition: all .2s ease;
+      background-color: white;
+      box-shadow: 3px 3px 5px rgba(0,0,0, .3);
+      pointer-events: none;
+      border-radius: 3px;
+      padding: 10px;
+      transform: scale(.9) translateY(-10px);
+      opacity: 0;
+
+      &:before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: rotate(45deg) translate(-9px, 3px);
+        width: 10px;
+        height: 10px;
+        background-color: white;
+      }
+
+      &:hover {
+        pointer-events: all;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      > div {
+        cursor: pointer;
+
+        &:hover {
+          color: darkblue;
+        }
+      }
+    }
+  }
+}
