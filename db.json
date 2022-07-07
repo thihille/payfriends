@@ -1,0 +1,21 @@
+{
+  "login": [],
+  "profile": [
+    {
+      "id": 1,
+      "avatar": "avatar.svg",
+      "name": "Thiago Hille"
+    }
+  ],
+  "paymentsResources": [
+    {
+      "id": 1,
+      "user": "claudia",
+      "name": "Claudia",
+      "category": "Professor 1",
+      "created": "2020/05/23 11:00:00",
+      "amount": 100,
+      "payment": true
+    }
+  ]
+}

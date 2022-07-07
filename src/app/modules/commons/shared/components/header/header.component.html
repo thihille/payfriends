@@ -1,0 +1,11 @@
+<section>
+    <div class="logo">
+        <img src="../../../../../../assets/img/logo-white.svg" alt="PayFriends" />
+      </div>
+    <div class="profile" *ngIf="userProfile">
+        <img [src]="'../../../../../../assets/img/avatar.svg'" alt="Profile" />
+    </div>
+    <div class="menu">
+      <div [routerLink]="['/']" routerLinkActive="router-link-active" >Logout</div>
+    </div>
+</section>

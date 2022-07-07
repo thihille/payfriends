@@ -1,0 +1,381 @@
+@mixin getSrcIllustrator($svgName, $position: "center"){
+  background: url(../../../../../../assets/img/payfriend-illustrator/#{$svgName}) no-repeat #{$position};
+}
+
+:host {
+  #man-doing-payment {
+    position: relative;
+    width: 496px;
+    height: 433px;
+    @include getSrcIllustrator("background.svg", "center bottom");
+  }
+  #illustrator-friend {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100px;
+    height: 345px;
+    z-index: 10;
+
+    .friend-head {
+      position: absolute;
+      left: 30px;
+      top: 0;
+      width: 37px;
+      height: 69px;
+      @include getSrcIllustrator("head.svg");
+      transform-origin: center bottom;
+      animation: anHead 3s ease infinite;
+
+      .eyebrows {
+        position: absolute;
+        top: 16px;
+        left: 12px;
+        width: 19px;
+        height: 4px;
+        @include getSrcIllustrator("eyebrows.svg");
+      }
+      .eyes {
+        position: absolute;
+        top: 21px;
+        left: 14px;
+        width: 16px;
+        height: 6px;
+        @include getSrcIllustrator("eyes.svg");
+        animation: anEyes 9.5s ease infinite;
+      }
+      .moustache {
+        position: absolute;
+        top: 32px;
+        left: 14px;
+        width: 19px;
+        height: 4px;
+        @include getSrcIllustrator("moustache.svg");
+        animation: anMoustache 9.5s ease infinite;
+      }
+    }
+
+    .clothes {
+      position: absolute;
+      left: 0px;
+      top: 52px;
+      width: 100px;
+      height: 290px;
+      @include getSrcIllustrator("clothes.svg");
+
+      .hands {
+        position: absolute;
+        top: 36px;
+        left: 2px;
+        width: 99px;
+        height: 46px;
+        @include getSrcIllustrator("hands.svg", "left bottom");
+        transform-origin: left center;
+        animation: anHands 9s ease infinite;
+      }
+    }
+
+    @keyframes anHead {
+      0% {
+        transform: translateZ(0) skewX(0deg) scale(1) rotate(0deg);
+      }
+      40% {
+        transform: translateZ(0) skewX(-1deg) scale(.99) rotate(3deg);
+      }
+      80% {
+        transform: translateZ(0) skewX(1deg) scale(.98, 1) rotate(1deg);
+      }
+      100% {
+        transform: translateZ(0) skewX(0deg) scale(1) rotate(0deg);
+      }
+
+    }
+
+    @keyframes anMoustache {
+      0% {
+        transform: translateZ(0) rotate(0deg);
+      }
+      33% {
+        transform: translateZ(0) rotate(0deg);
+      }
+      35% {
+        transform: translateZ(0) rotate(20deg);
+      }
+      37% {
+        transform: translateZ(0) rotate(0deg);
+      }
+      100% {
+        transform: translateZ(0) rotate(0deg);
+      }
+
+    }
+
+    @keyframes anEyes {
+      0% {
+        transform: translateZ(0) scale(1);
+      }
+      1% {
+        transform: translateZ(0) scale(1, 0);
+      }
+      2% {
+        transform: translateZ(0) scale(1);
+      }
+      55% {
+        transform: translateZ(0) scale(1);
+      }
+      56% {
+        transform: translateZ(0) scale(1, 0);
+      }
+      57% {
+        transform: translateZ(0) scale(1);
+      }
+      100% {
+        transform: translateZ(0) scale(1);
+      }
+
+    }
+
+    @keyframes anHands {
+      5%, 95% {
+        transform: translateZ(0) skewX(0deg) scale(1) rotate(0deg);
+      }
+      40%, 60% {
+        transform: translateZ(0) skewX(-5deg) scale(.97) rotate(2deg);
+      }
+      50% {
+        transform: translateZ(0) skewX(10deg) scale(.95, 1) rotate(-2deg);
+      }
+    }
+  }
+
+  #illustrator-scene {
+    .post {
+      position: absolute;
+      bottom: 0px;
+      left: 15px;
+      width: 140px;
+      height: 100%;
+      @include getSrcIllustrator("post.svg");
+
+      .lamp {
+        position: absolute;
+        top: 82px;
+        left: 68px;
+        width: 50px;
+        height: 70px;
+        @include getSrcIllustrator("lamp.svg");
+      }
+
+      .effect-lamp {
+        position: absolute;
+        top: 60px;
+        left: 30px;
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        animation: anLampLights 16.3s ease infinite;
+        background: -moz-radial-gradient(center, ellipse cover, rgba(255,186,85,1) 0%, rgba(255,186,85,0) 74%);
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(255,186,85,1) 0%,rgba(255,186,85,0) 74%);
+        background: radial-gradient(ellipse at center, rgba(255,186,85,1) 0%,rgba(255,186,85,0) 74%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffba55', endColorstr='#00ffba55',GradientType=1 );
+      }
+    }
+
+    .grass-front {
+      position: absolute;
+      width: 100px;
+      height: 105px;
+      @include getSrcIllustrator("plant-front.svg");
+      z-index: 2;
+      transform-origin: center bottom;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+
+      &.g-left {
+        bottom: 0px;
+        left: 0px;
+        animation-duration: 4s;
+        animation-name: anGrassFront;
+      }
+      &.g-right {
+        bottom: 0px;
+        right: -10px;
+        transform: scale(-1, 1);
+        animation-duration: 5.6s;
+        animation-name: anGrassFrontR;
+      }
+    }
+
+    .grass-back {
+      position: absolute;
+      width: 50px;
+      height: 65px;
+      @include getSrcIllustrator("plant-back.svg");
+      transform-origin: center bottom;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+
+      &.g-left {
+        bottom: 0px;
+        left: 60px;
+        animation-duration: 5.6s;
+        animation-name: anGrassBack;
+      }
+      &.g-right {
+        bottom: 0px;
+        right: 25px;
+        animation-duration: 4s;
+        animation-name: anGrassBackR;
+      }
+    }
+
+    .chair {
+      position: absolute;
+      left: 0px;
+      bottom: 0;
+      width: 100%;
+      height: 105px;
+      @include getSrcIllustrator("chair.svg");
+    }
+
+    @keyframes anLampLights {
+      0%, 100% {
+        transform: scale(1.2);
+        opacity: .3;
+      }
+      50% {
+        transform: scale(.6);
+        opacity: 1;
+      }
+    }
+
+    @keyframes anGrassFront {
+      0%, 100% {
+        transform: translateZ(0) skewX(10deg);
+      }
+      50% {
+        transform: translateZ(0) skewY(0deg);
+      }
+    }
+
+    @keyframes anGrassFrontR {
+      0%, 100% {
+        transform: translateZ(0) skewX(10deg) scale(-1, 1);
+      }
+      50% {
+        transform: translateZ(0) skewY(0deg) scale(-1, 1);
+      }
+    }
+
+    @keyframes anGrassBack {
+      0%, 100% {
+        transform: translateZ(0) skewX(-10deg);
+      }
+      50% {
+        transform: translateZ(0) skewY(0deg);
+      }
+    }
+
+    @keyframes anGrassBackR {
+      0%, 100% {
+        transform: translateZ(0) skewX(-10deg) scale(-1, 1);
+      }
+      50% {
+        transform: translateZ(0) skewY(0deg) scale(-1, 1);
+      }
+    }
+  }
+
+  #illustrator-credit-card {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80%;
+    height: 170px;
+    @include getSrcIllustrator("background-credit-card.svg", "right center");
+
+    .credit-card {
+      position: absolute;
+      right: 90px;
+      top: 70px;
+      width: 118px;
+      height: 79px;
+      @include getSrcIllustrator("credit-card.svg");
+      animation: anCreditCard 2s ease .4s infinite;
+    }
+
+    .currency {
+      position: absolute;
+      left: 30px;
+      top: 60px;
+      width: 118px;
+      height: 79px;
+      z-index: 10;
+      @include getSrcIllustrator("currency.svg");
+      animation: anCurrency 12s ease .4s infinite;
+    }
+
+    @keyframes anCreditCard {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(2deg);
+      }
+    }
+
+    @keyframes anCurrency {
+      0% {
+        transform: translate(75px, 75px) scale(0);
+        opacity: 1;
+      }
+      10% {
+        transform: translate(0, 0) scale(1);
+        opacity: .4;
+      }
+      10.0001% {
+        transform: translate(75px, 75px) scale(0);
+        opacity: 1;
+      }
+      20% {
+        transform: translate(0, 0) scale(1);
+        opacity: .4;
+      }
+      20.0001% {
+        transform: translate(75px, 75px) scale(0);
+        opacity: 1;
+      }
+      30% {
+        transform: translate(0, 0) scale(1);
+        opacity: .4;
+      }
+      30.0001% {
+        transform: translate(75px, 75px) scale(0);
+        opacity: 1;
+      }
+      40% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      60% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      62% {
+        transform: translate(0, 0) scale(1) rotate(-15deg);
+        opacity: 1;
+      }
+      64% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+    }
+  }
+
+}

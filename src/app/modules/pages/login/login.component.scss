@@ -1,0 +1,123 @@
+:host {
+
+  #pay-login {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: stretch;
+    justify-content: space-between;
+
+    > div {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.credentials {
+        max-width: 540px;
+        background-color: #F2F2F2;
+      }
+
+      &.image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    form {
+      width: 300px;
+      height: 300px;
+
+      > div {
+
+        &.message-error {
+
+          p {
+            color: red;
+            font-size: .9rem;
+            font-weight: 400;
+          }
+        }
+
+        h2 {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .input-theme {
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 3px;
+        padding: 16px 10px 13px 10px;
+        margin-bottom: 35px;
+
+        &.valid-value {
+          border: 1px solid rgba(0, 0, 0, .3);
+        }
+
+        &:first-child {
+          margin-top: 35px;
+        }
+
+        &:before {
+          content: attr(name-label);
+          position: absolute;
+          left: 10px;
+          top: -10px;
+          padding: 3px 6px;
+          font-size: .7rem;
+          background-color: #f2f2f2;
+          font-weight: bold;
+        }
+
+        .invisible-form {
+          width: 100%;
+          background-color: transparent;
+          border: none;
+          padding-left: 5px;
+          font-family: 'Roboto';
+          font-weight: 600;
+          font-size: .9rem;
+
+          &:focus {
+            border: none;
+            outline: none;
+          }
+        }
+
+        .show-password {
+          position: absolute;
+          right: 10px;
+          top: 15px;
+          cursor: pointer;
+
+          .icon-show-password {
+            width: 17px;
+          }
+        }
+      }
+
+      .btn-enter {
+        width: 100%;
+        border: none;
+        padding: 10px;
+        border-radius: 3px;
+        background-color: #007DFE;
+        color: white;
+        font-weight: 400;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #056fda;
+        }
+
+        &.disabled {
+          background-color: grey;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
