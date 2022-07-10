@@ -6,7 +6,7 @@ Necessário o **Json-server** para rodar o projeto - `npm install -g json-server
 
 ## Instalação do Projeto
 
-Clone o projeto Run `https://github.com/thihille/payfriends.git` em seu computador.
+Clone o projeto `git clone https://github.com/thihille/payfriends.git` em seu computador.
 
 Após baixar, acesse a pasta do projeto e execute `npm install` para instalar todas as dependências.
 
