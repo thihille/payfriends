@@ -24,7 +24,7 @@
         </div>
       </div>
       <div>
-        <button type="submit" class="btn-enter" [class.disabled]="loading">{{ loading ? 'Entrando...' : 'Entrar'}}</button>
+        <button type="submit" class="btn-enter" [disabled]="credentials.invalid" [class.disabled]="loading || credentials.invalid">{{ loading ? 'Entrando...' : 'Entrar'}}</button>
       </div>
     </form>
   </div>

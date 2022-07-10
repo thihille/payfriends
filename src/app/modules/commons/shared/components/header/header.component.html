@@ -3,7 +3,7 @@
         <img src="../../../../../../assets/img/logo-white.svg" alt="PayFriends" />
       </div>
     <div class="profile" *ngIf="userProfile">
-        <img [src]="'../../../../../../assets/img/avatar.svg'" alt="Profile" />
+        <img [src]="'../../../../../../assets/img/'+ userProfile.avatar" [alt]="userProfile.name" [title]="userProfile.name" />
     </div>
     <div class="menu">
       <div [routerLink]="['/']" routerLinkActive="router-link-active" >Logout</div>

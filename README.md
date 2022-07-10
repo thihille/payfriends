@@ -1,27 +1,28 @@
 # Payfriends
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
+Este projeto foi gerado com a versão [Angular CLI](https://github.com/angular/angular-cli)@11.2.14.
 
-## Development server
+Necessário o **Json-server** para rodar o projeto - `npm install -g json-server`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Instalação do Projeto
 
-## Code scaffolding
+Clone o projeto Run `https://github.com/thihille/payfriends.git` em seu computador.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Após baixar, acesse a pasta do projeto e execute `npm install` para instalar todas as dependências.
 
-## Build
+## Rodando o Projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Após a instalação de suas dependências, ainda no diretório do projeto, execute `npm run mock` para iniciar o ambiente mock para desenvolvimento.
 
-## Running unit tests
+Após executar o ambiente mock de desenvolvimento, execute o projeto pelo comando `npm run start`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+###Abra o navegador
 
-## Running end-to-end tests
+Rode a url **[http://localhost:4200](http://localhost:4200)**
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+###Url do mock
 
-## Further help
+O mock é executado na url **[http://localhost:3000](http://localhost:3000)**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+#Enjoy ;-)
