@@ -8,6 +8,7 @@ export const environment = {
   endpoints: {
     login: `${apiUrl}/login`,
     profile: `${apiUrl}/profile`,
+    payments: `${apiUrl}/payments`,
   }
 };
 
