@@ -16,11 +16,11 @@ Após a instalação de suas dependências, ainda no diretório do projeto, exec
 
 Após executar o ambiente mock de desenvolvimento, execute o projeto pelo comando `npm run start`.
 
-###Abra o navegador
+### Abra o navegador
 
 Rode a url **[http://localhost:4200](http://localhost:4200)**
 
-###Url do mock
+### Url do mock
 
 O mock é executado na url **[http://localhost:3000](http://localhost:3000)**
 
