@@ -1,1 +1,197 @@
 <pay-header [user]="user"></pay-header>
+
+<div class="content">
+  <ng-container [ngTemplateOutlet]="headerTablePayments"></ng-container>
+  <ng-container [ngTemplateOutlet]="tablePayments"></ng-container>
+  <pay-loader *ngIf="loadingPayments"></pay-loader>
+</div>
+
+<ng-template #headerTablePayments>
+
+  <div class="header-payments">
+    <div class="title">
+      <h2>
+        Meus Pagamentos
+      </h2>
+    </div>
+    <div class="actions">
+      <p-button styleClass="p-button-primary" (click)="handleInsertPayment()">Adicionar Pagamento</p-button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #tablePayments>
+  <p-table
+    #dataPayments
+    *ngIf="!loadingPayments"
+    [value]="payments"
+    styleClass="p-datatable-gridlines"
+    responsiveLayout="scroll"
+    [globalFilterFields]="['name','user','category','debit_date', 'amount', 'paid']"
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5,10,15]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first} de {last}"
+    sortField="name"
+  >
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <span class="p-input-icon-left search-input">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dataPayments.filterGlobal($event.target.value, 'contains')"
+            placeholder="Buscar" />
+        </span>
+        <p-button styleClass="p-button-outlined" (click)="filterOptions.toggle($event)">
+          <i-feather name="filter" class="icon-filter"></i-feather>
+          Filtros
+        </p-button>
+        <p-overlayPanel appendTo="body" #filterOptions [showCloseIcon]="true" [showCloseIcon]="false" [style]="{width: '300px'}">
+          <ng-template pTemplate>
+            <h4 style="margin: 0 0 20px 0;">Exibição de colunas da tabela</h4>
+            <div class="filter-line divisor">
+              <p-inputSwitch [(ngModel)]="filterTable.category"></p-inputSwitch> <span class="span-label"><strong>Título</strong> {{ filterTable.category ? 'habilitado' : 'desabilitado' }}</span>
+            </div>
+            <div class="filter-line divisor">
+              <p-inputSwitch [(ngModel)]="filterTable.debit_date"></p-inputSwitch> <span class="span-label"><strong>Data</strong> {{ filterTable.debit_date ? 'habilitado' : 'desabilitado' }}</span>
+            </div>
+            <div class="filter-line">
+              <p-inputSwitch [(ngModel)]="filterTable.amount"></p-inputSwitch> <span class="span-label"><strong>Valor</strong> {{ filterTable.amount ? 'habilitado' : 'desabilitado' }}</span>
+            </div>
+            <h4 style="margin: 20px 0 20px 0;">Por pagamento</h4>
+            <div class="filter-line">
+              <p-triStateCheckbox [(ngModel)]="filterTable.typePaid" (onChange)="onFilterByPaid($event)"></p-triStateCheckbox>
+              <span style="margin-left: 10px;">{{ getLabelPaids() }}</span>
+            </div>
+          </ng-template>
+        </p-overlayPanel>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="column-name" pSortableColumn="name" *ngIf="filterTable.name">
+          Usuário <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th id="column-category" pSortableColumn="category" *ngIf="filterTable.category">
+          Título <p-sortIcon field="category"></p-sortIcon>
+        </th>
+        <th id="column-debit_date" pSortableColumn="debit_date" *ngIf="filterTable.debit_date">
+          Data <p-sortIcon field="debit_date"></p-sortIcon>
+        </th>
+        <th id="column-amount" pSortableColumn="amount" *ngIf="filterTable.amount">
+          Valor <p-sortIcon field="amount"></p-sortIcon>
+        </th>
+        <th id="column-paid" pSortableColumn="paid" *ngIf="filterTable.paid">
+          Pago <p-sortIcon field="paid"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-payment>
+      <tr>
+        <td *ngIf="filterTable.name">
+          <p style="margin: 0">{{ payment.name }}</p>
+          <p style="margin: 0">
+            <small>
+              {{ payment.user ? '@' + payment.user : '' }}
+            </small>
+          </p>
+        </td>
+        <td *ngIf="filterTable.category">
+          {{ payment.category }}
+        </td>
+        <td *ngIf="filterTable.debit_date" style="text-align: center;">
+          {{ payment.debit_date | date:'dd/MM/yyyy HH:mm' }}
+        </td>
+        <td *ngIf="filterTable.amount" style="text-align: right;">
+          {{ payment.amount | currency:'BRL' }}
+        </td>
+        <td *ngIf="filterTable.paid" style="text-align: center;">
+          <p-checkbox
+            [binary]="true"
+            [name]="'paid-'+payment.id"
+            [value]="payment.id"
+            [(ngModel)]="payment.paid"
+            [disabled]="payment.disabled"
+            (ngModelChange)="onChangePaid($event, payment)"
+          ></p-checkbox>
+        </td>
+        <td>
+          <div class="buttons-group">
+            <button class="btn-icon" (click)="handleUpdatePayment(payment)">
+              <i-feather name="edit"></i-feather>
+            </button>
+            <button class="btn-icon" (click)="handleConfirmDeletePayment(payment)">
+              <i-feather name="x-circle"></i-feather>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">Nenhuma conta encontrada</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<p-dialog [(visible)]="modalDeletePayment" [modal]="true" [style]="{width: '300px'}" (onHide)="paymentSelected = null">
+  <ng-template pTemplate="header">
+    <h3>Excluir pagamento?</h3>
+  </ng-template>
+  <div class="modal-content">
+    <p>
+      Usuário: {{ paymentSelected?.name }}
+    </p>
+    <p>
+      Data: {{ paymentSelected?.debit_date | date:'dd/MM/yyyy HH:mm' }}
+    </p>
+    <p>
+      Valor: {{ paymentSelected?.amount | currency:'BRL' }}
+    </p>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button styleClass="p-button-outlined" [disabled]="waitingResponse" (click)="modalDeletePayment = false;">Cancelar</p-button>
+    <p-button styleClass="p-button-primary" [disabled]="waitingResponse" (click)="deletePayment(paymentSelected.id)">Confirmar</p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="modalInsertPayment" [modal]="true" [style]="{width: '500px'}" (onHide)="paymentSelected = null">
+  <ng-template pTemplate="header">
+    <h3>{{ paymentSelected ? 'Alterar' : 'Adicionar' }} Pagamento</h3>
+  </ng-template>
+  <div class="modal-content">
+    <p>Cadastre os dados abaixo:</p>
+    <form [formGroup]="formPayment">
+      <div class="group" style="display: flex;">
+        <div class="p-field" style="margin-right: 10px; flex: 1;">
+          <input pInputText formControlName="name" placeholder="Nome *" [style]="{width: '100%'}">
+        </div>
+        <div class="field col-12 md:col-3" style="flex: 1;">
+          <p-inputNumber formControlName="amount" placeholder="Valor *" mode="currency" locale="pt-BR" currency="BRL"
+            [minFractionDigits]="2" [style]="{width: '100%'}"></p-inputNumber>
+        </div>
+      </div>
+      <div class="group" style="display: flex; margin-top: 10px;">
+        <div class="field col-12 md:col-3" style="margin-right: 10px; flex: 1;">
+          <p-calendar appendTo="body" inputId="debit_date" placeholder="Data de débito *" dateFormat="dd/mm/yy"
+            [showTime]="true" [hourFormat]="24" [minDate]="dateTime" formControlName="debit_date"
+            [style]="{width: '100%'}"></p-calendar>
+        </div>
+        <div class="field col-12 md:col-3" style="flex: 1;">
+          <input pInputText formControlName="category" placeholder="Título" [style]="{width: '100%'}">
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button styleClass="p-button-outlined" [disabled]="waitingResponse" (click)="modalInsertPayment = false">Cancelar</p-button>
+    <p-button styleClass="p-button-primary" [disabled]="waitingResponse" [disabled]="formPayment.invalid" (click)="insertPayment()"
+      *ngIf="!paymentSelected">Confirmar</p-button>
+    <p-button styleClass="p-button-success" [disabled]="formPayment.invalid || waitingResponse" (click)="updatePayment()"
+      *ngIf="paymentSelected">Atualizar</p-button>
+  </ng-template>
+</p-dialog>
+
+<p-toast position="bottom-right" key="toastr"></p-toast>

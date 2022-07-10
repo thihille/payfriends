@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { IHeaderShared } from '../../../interfaces/header-shared.interface';
 import { AuthService } from './../../../services/auth.service';
 
@@ -17,8 +17,13 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  ngOnChanges(changes: SimpleChanges){
+
+    if(changes.userProfile && changes.userProfile.currentValue){
+      this.userProfile = changes.userProfile.currentValue;
+    }
   }
 
 }

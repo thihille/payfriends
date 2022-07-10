@@ -18,6 +18,6 @@ export class AuthService {
 
     getUser(): Observable<any> {
 
-      return this._http.get(environment.endpoints.profile).pipe(first());
+      return this._http.get(`${environment.endpoints.profile}/1`).pipe(first());
     }
 }

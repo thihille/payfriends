@@ -1,0 +1,90 @@
+:host {
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    min-height: calc(100vh - 90px);
+    padding: 20px 40px;
+    background-color: #f2f2f2;
+
+    .search-input {
+      margin-right: 15px;
+    }
+
+    .buttons-group {
+      display: flex;
+      justify-content: flex-end;
+
+      .btn-icon {
+        flex: 0;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        width: 15px;
+        cursor: pointer;
+
+        &:first-child {
+          margin-right: 15px;
+
+          &:hover {
+            color: #002d69;
+          }
+        }
+
+        &:last-child {
+          margin-right: 10px;
+          &:hover {
+            color: rgb(189, 37, 37);
+          }
+        }
+      }
+    }
+
+    .header-payments {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 10px;
+    }
+
+    .icon-filter {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      color: #ccc;
+    }
+
+    #column-name {
+      width: 350px;
+    }
+
+    #column-debit_date {
+      width: 150px;
+      text-align: center;
+    }
+    #column-amount {
+      width: 150px;
+      text-align: right;
+    }
+    #column-paid {
+      width: 100px;
+      text-align: center;
+    }
+  }
+}
+
+.filter-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+
+  &.divisor {
+    border-bottom: 1px solid #eee;
+  }
+
+  .span-label {
+    margin-left: 10px;
+  }
+}
